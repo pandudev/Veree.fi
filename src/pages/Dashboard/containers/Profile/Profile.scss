@@ -1,0 +1,159 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+        position: relative;
+
+        &__avatar {
+            width: 120px;
+            height: 120px;
+            background-color: lightgrey;
+            border-radius: 50%;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                object-position: center center;
+            }
+
+            &__edit {
+                width: 120px;
+                height: 120px;
+                position: absolute;
+                right: 50%;
+                transform: translateX(50%);
+                top: 0;
+                display: flex;
+                border-radius: 50%;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.5rem;
+                opacity: 0;
+                transition: all 0.3s ease-in;
+                color: rgb(33, 108, 221);
+
+                &:hover {
+                    opacity: 1;
+                    background-color: #fff;
+                    background-color: rgba($color: #ffffff, $alpha: .8)
+                }
+            }
+        }
+
+        &__username {
+            margin-top: 1rem;
+            text-transform: capitalize;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            position: relative;
+            
+
+            &__input {
+                padding: 6px 8px;
+            }
+
+            &__edit {
+                position: absolute;
+                right: -40px;
+                font-size: 1rem;
+                color: grey;
+                width: 30px;
+                height: 30px;
+                
+                &:hover {
+                    color: rgb(33, 108, 221);
+                }
+            }
+            
+            &__cancel {
+                position: absolute;
+                right: -70px;
+                font-size: 1rem;
+                width: 30px;
+                height: 30px;
+                color: grey;
+
+                &:hover {
+                    color: red;
+                }
+            }
+        }
+    }
+
+    &__link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__title {
+            margin-bottom: 1rem;
+        }
+
+        &__connect {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &__title {
+                margin-bottom: 1rem;
+                font-style: italic;
+                color: grey;
+            }
+
+            &__wrapper {
+                flex-basis: 20%;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            &__btn {
+                padding: 10px;
+                font-size: 1.5rem;
+                border-radius: 50%;
+                margin: 0 8px;
+                color: #333;
+
+                &:hover {
+                    color: rgb(33, 108, 221);
+                }
+            }
+        }
+
+        &__existing {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+
+            &__wrapper {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1rem;
+            }
+
+            &__icon {
+                width: 30px;
+                height: 30px;
+                font-size: 1.2rem;
+                margin-right: 1rem;
+            }
+
+            &__url {
+                margin-right: 1rem;
+
+                &--verified {
+                    color: rgb(33, 108, 221);
+                }
+            }
+        }
+    }
+}

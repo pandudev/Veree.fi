@@ -1,0 +1,86 @@
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+
+    &__cta {
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 16px 24px;
+        border-radius: 30px;
+
+        & > .btn-icon {
+            margin-right: 1rem;
+        }
+
+        &--google {
+            background-color: #F8F8F8;
+            border: 2px solid #000;
+            margin-bottom: 1rem;
+        }
+
+        &--facebook {
+            background-color: #3A5998;
+            color: #FFF;
+        }
+    }
+
+    &__divider {
+        text-align: center;
+        font-size: 14px;
+        color: grey;
+        position: relative;
+        margin: 2rem 0;
+
+        &::after, &::before {
+            position: absolute;
+            content: '';
+            height: 1px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: grey;
+        }
+
+        &::after {
+            right: 0;
+            width: 120px;
+        }
+
+        &::before {
+            left: 0;
+            width: 120px;
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        
+        &__input {
+            box-sizing: border-box;
+            padding: 16px 24px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            border: none;
+            border: solid 1px #000;
+            border-radius: 30px;
+        }
+
+        &__submit {
+            margin-top: 1rem;
+            align-self: center;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 16px 48px;
+            border-radius: 30px;
+            background-color: #000000;
+            color: #FFFFFF;
+            text-transform: capitalize;
+
+            &:disabled {
+                background-color: grey;
+            }
+        }
+    }
+}

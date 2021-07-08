@@ -1,0 +1,77 @@
+.navbar {
+    height: 55px;
+    width: 100%;
+    border-bottom: 1px solid #F0F0F0;
+
+    &__wrapper {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    &__brand {
+        position: absolute;
+        left: 0;
+        
+        img {
+            width: 120px;
+            height: auto;
+        }
+    }
+
+    &__menu {
+        display: flex;
+        list-style: none;
+
+        li a {
+            color: inherit;
+            text-decoration: none;
+            margin: 0 1rem;
+            position: relative;
+            color: grey;
+
+            &:hover {
+                color: rgb(33, 108, 221) !important;
+            }
+
+            &.active {
+                color: rgb(33, 108, 221);
+                &::after {
+                    right: -10px;
+                }
+            }
+
+            &::after {
+                position: absolute;
+                content: '';
+                height: 2px;
+                background-color: rgb(33, 108, 221);
+                bottom: -18px;
+                left: -10px;
+                right: calc(100% + 10px);
+                transition: right .3s ease-in-out;
+            }
+
+            &:hover {
+                color: rgb(33, 108, 221);
+
+                &::after {
+                    right: -10px;
+                }
+            }
+        }
+    }
+
+    &__logout {
+        font-size: 1rem;
+        position: absolute;
+        right: 0;
+        color: grey;
+
+        &:hover {
+            color: rgb(33, 108, 221);
+        }
+    }
+}
