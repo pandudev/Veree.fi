@@ -15,14 +15,14 @@ const App = () => {
     }, [])
     
     return (
-        <HashRouter>
+        <Router>
             <Switch>
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/auth" component={Auth} />
                 <Route path="/:username" component={Social} />
                 <Redirect from="/" exact to="/dashboard" />
             </Switch>
-        </HashRouter>
+        </Router>
     );
 }
 

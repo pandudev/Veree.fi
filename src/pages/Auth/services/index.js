@@ -42,6 +42,18 @@ export const addNewUser = (user) => {
     return userRef;
 }
 
+export const updatePassword = (password, newPassword) => {
+    const user = firebase.auth().currentUser;
+    const credential = firebase.auth.EmailAuthProvider.credential(
+        user.email, 
+        password
+    );
+
+    return user.reauthenticateWithCredential(credential).then((res) => {
+        firebase.auth().currentUser.updatePassword(newPassword);
+    });
+}
+
 export const logout = () => {
     firebase.auth().signOut();
 }

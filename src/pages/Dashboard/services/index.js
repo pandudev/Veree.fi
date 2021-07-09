@@ -1,6 +1,7 @@
 import firebase from './../../../config/firebase';
 import axios from 'axios';
 import { instagramAppId } from '../../../config/auth';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 
 export const getProfile = (uid) => {
 
@@ -22,12 +23,26 @@ export const addNewProfile = (user) => {
             createdOn: new Date(),
             modifiedOn: new Date(),
             displayName: displayName ? displayName : email.split('@')[0],
-            photoURL: null
+            photoURL: null,
+            backgroundId: 1
         })
     });
 
     return profileRef;
 }
+
+export const selectBackground = (uid, backgroundId) => {
+    const profileRef = firebase.firestore().doc(`profiles/${uid}`);
+    profileRef.get().then((doc) => {
+        profileRef.update({
+            backgroundId
+        })
+    });
+
+    return profileRef;
+}
+
+
 
 export const updateProfileDisplayName = (uid, name) => {
     const profileRef = firebase.firestore().doc(`profiles/${uid}`);
@@ -40,23 +55,34 @@ export const updateProfileDisplayName = (uid, name) => {
     return profileRef;
 }
 
-export const updatePhotoURL = (uid, url) => {
+export const updateUsername = (uid, username) => {
     const userRef = firebase.firestore().doc(`users/${uid}`);
     userRef.get().then((doc) => {
         userRef.update({
+            username
+        })
+    });
+
+    return userRef;
+}
+
+export const updatePhotoURL = (uid, url) => {
+    const profileRef = firebase.firestore().doc(`profiles/${uid}`);
+    profileRef.get().then((doc) => {
+        profileRef.update({
             photoURL: url
         })
     })
+
+    return profileRef;
 }
 
 export const connectFacebook = (uid) => {
     const FB = window.FB;
 
     FB.login(function (loginResponse) {
-        console.log(loginResponse);
         if (loginResponse.authResponse) {
             FB.api('/me?fields=id,name,friends,link', function (response) {
-                console.log(response);
                 const social = {
                     userId: response.id,
                     name: response.name,
@@ -86,13 +112,14 @@ export const connectInstagram = (uid) => {
 }
 
 export const updateSocial = (uid, social) => {
-    console.log(social);
     const profileRef = firebase.firestore().doc(`profiles/${uid}`);
     profileRef.get().then((doc) => {
         profileRef.update({
             socials: firebase.firestore.FieldValue.arrayUnion(social)
         })
     });
+
+    NotificationManager.success(`${social.type} added to your profile`);
 
     return profileRef;
 }

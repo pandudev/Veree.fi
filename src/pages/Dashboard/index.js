@@ -45,7 +45,6 @@ const Dashboard = () => {
                         setUser(snap.data());
                     })
                     getProfile(res.uid).onSnapshot((snap) => {
-                        console.log(snap);
                         setProfile(snap.data());
                     })
                 }
@@ -73,8 +72,8 @@ const Dashboard = () => {
                         <div className="page-wrapper container">
                             <Switch>
                                 <Route path={`${path}/profile`} component={() => <Profile user={user} uid={uid} profile={profile} />} />
-                                <Route path={`${path}/background`} component={Background} />
-                                <Route path={`${path}/setting`} component={Setting} />
+                                <Route path={`${path}/background`} component={() => <Background  user={user} uid={uid} profile={profile}/>} />
+                                <Route path={`${path}/setting`} component={() => <Setting user={user} uid={uid} profile={profile}/>} />
                                 <Redirect from='*' to={`${path}/profile`} />
                             </Switch>
                         </div>

@@ -1,0 +1,75 @@
+.setting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 2rem;
+        
+        &__group {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+            position: relative;
+            
+            label {
+                font-size: 1rem;
+                line-height: 2;
+            }
+
+            &__caption {
+                font-size: 12px;
+                color: grey;
+                line-height: 1.6;
+                margin-bottom: 8px;
+
+                &--error {
+                    color: red;
+                }
+            }
+        }
+
+        &__input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px 16px;
+            font-size: 1rem;
+            border: none;
+            border: solid 1px #000;
+
+            &--with-prefix {
+                border: none;
+                border: solid 1px #000;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 8px 16px 8px 124px;
+                font-size: 1rem;
+            }
+
+            &__prefix {
+                position: absolute;
+                left: 8px;
+                bottom: 10px;
+            }
+        }
+
+        &__submit {
+            margin-top: 1rem;
+            align-self: center;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 16px 48px;
+            border-radius: 30px;
+            background-color: #000000;
+            color: #FFFFFF;
+            text-transform: capitalize;
+
+            &:disabled {
+                background-color: grey;
+            }
+        }
+    }
+}

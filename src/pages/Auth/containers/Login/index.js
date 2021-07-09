@@ -10,7 +10,6 @@ const Login = () => {
 
     const handleOnLogin = async (provider) => {
         const res = await socialMediaAuth(provider);
-        console.log(res);
     }
 
     const handleEmailLogin = (user) => {

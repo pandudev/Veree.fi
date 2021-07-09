@@ -1,0 +1,88 @@
+.social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    padding: 1rem;
+    min-height: 100vh;
+    overflow: hidden;
+
+    &__profile {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__avatar {
+            width: 150px;
+            height: 150px;
+            background-color: lightgrey;
+            border-radius: 50%;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                object-position: center center;
+            }
+        }
+
+        &__name {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            text-transform: capitalize;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+    }
+
+    .scroll_container {
+        width: 100%;
+        padding-left: 2rem;
+    }
+    
+    &__links {
+        cursor: pointer;
+        align-self: flex-start;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 5rem;
+
+        &__item {
+            padding: 1.2rem;
+            flex-grow: 0;
+            flex-shrink: 0;
+            width: 220px;
+            height: 190px;
+            margin-right: 2rem;
+            background-color: rgba(255, 255, 255, 0.29);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+
+            &__user {
+                display: flex;
+                align-items: center;
+                
+                & > .icon {
+                    font-size: 1.8rem;
+                    margin-right: 10px;
+                }
+            }
+
+            &__followers {
+
+                p {
+                    font-size: 4rem;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}

@@ -8,6 +8,7 @@ import { connectFacebook, connectInstagram, updateAvatar, updatePhotoURL, update
 import firebase from './../../../../config/firebase';
 import Spinner from '../../../../shared/components/Spinner';
 import Resizer from "react-image-file-resizer";
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 
 const Profile = ({ user, profile, uid }) => {
 
@@ -50,11 +51,19 @@ const Profile = ({ user, profile, uid }) => {
 
     const onSaveName = () => {
         setShowSpinner(true);
-        updateProfileDisplayName(uid, displayName).onSnapshot(res => {
-            setTimeout(() => {
-                setisEditName(false);
-                setShowSpinner(false);
-            }, 2000);
+        var unsubscribe = updateProfileDisplayName(uid, displayName).onSnapshot(res => {
+            setisEditName(false);
+            NotificationManager.success('Display name has been changed.');
+            setShowSpinner(false);
+            unsubscribe();
+        }, (err) => {
+            var errorCode = err.code;
+            var errorMessage = err.message;
+
+            NotificationManager.error(errorMessage, errorCode);
+
+            setShowSpinner(false);
+
         });
     }
 
@@ -78,6 +87,19 @@ const Profile = ({ user, profile, uid }) => {
                                 if (progress < 100) {
                                     setShowSpinner(true);
                                 } else {
+                                    uploadTask.snapshot.ref.getDownloadURL().then(url => {
+                                        var unsubscribe = updatePhotoURL(uid, url).onSnapshot(snap => {
+                                            NotificationManager.success('Avatar has been updated.')
+                                            unsubscribe();
+                                        });
+
+                                    }).catch(err => {
+                                        var errorCode = err.code;
+                                        var errorMessage = err.message;
+
+                                        NotificationManager.error(errorMessage, errorCode);
+                                    });
+
                                     setShowSpinner(false);
                                 }
 
@@ -86,9 +108,7 @@ const Profile = ({ user, profile, uid }) => {
                                 throw error
                             });
 
-                        uploadTask.snapshot.ref.getDownloadURL().then(url => {
-                            updatePhotoURL(uid, url)
-                        })
+
                     },
                     "base64", 200, 200
                 );
@@ -101,26 +121,33 @@ const Profile = ({ user, profile, uid }) => {
     }
 
     useEffect(() => {
-        setSocialLinks(profile?.socials);
-        setUserProfile(profile);
 
-        let u;
+        let mounted = true;
 
-        if (socialLinks?.length) {
-            u = Socials.filter((sc) => {
-                return !profile?.socials?.some(s => {
-                    return s.type === sc.type
-                })
-            });
+        if (mounted) {
+            setSocialLinks(profile?.socials);
+            setUserProfile(profile);
+
+            let u;
+
+            if (socialLinks?.length) {
+                u = Socials.filter((sc) => {
+                    return !profile?.socials?.some(s => {
+                        return s.type === sc.type
+                    })
+                });
 
 
-        } else {
-            u = Socials;
+            } else {
+                u = Socials;
+            }
+
+            setAvailableSocialLinks(u);
         }
 
-        setAvailableSocialLinks(u);
-
-        console.log(userProfile);
+        return () => {
+            mounted = false;
+        }
     }, [])
 
     return (
